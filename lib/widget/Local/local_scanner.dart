@@ -7,7 +7,6 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 
 import '/screen/Local/local_view_download.dart';
 import '/notifier/share_notifier.dart';
-import '/model/data_model.dart';
 
 class LocalScannerWidget extends StatelessWidget {
   LocalScannerWidget({super.key});

@@ -42,7 +42,7 @@ class LocalMainScreen extends StatelessWidget {
                   onPressed: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>const LocalEntryScreen(),
+                      builder: (context) => const LocalEntryScreen(),
                     ),
                   ),
                   child: const Text('Sender/Scanner'),

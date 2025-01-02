@@ -3,11 +3,10 @@ class RefrenceModel {
   RefrenceModel({
     required this.keyField,
     required this.pairedField,
-    // required this.currentdevice,
   });
   final String keyField;
   final String pairedField;
-  // final String currentdevice;
+
   Map<String, dynamic> dataToJson() {
     return {
       'data':{
