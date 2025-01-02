@@ -36,11 +36,11 @@ class LocalViewDownload extends StatelessWidget {
                         child: Text('No Data'),
                       );
                     }
-                    return Column(children: [
-                      Text(allData[index]['data']['key']),
-                      Text(allData[index]['data']['key']) // just for new its text
-
-                    ],);
+                    return Column(
+                      children: [
+                        SelectableText(allData[index]['data']),
+                      ],
+                    );
                   },
                 ),
                 const SizedBox(

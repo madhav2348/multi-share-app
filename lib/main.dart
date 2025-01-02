@@ -1,8 +1,8 @@
+import '/notifier/user_notifier.dart';
+
 import '/notifier/share_notifier.dart';
 import '/screen/Local/local_main_screen.dart';
 import '/notifier/theme_notifier.dart';
-
-import '/notifier/user_notifier.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,9 +13,6 @@ void main() {
       providers: [
         ChangeNotifierProvider(
           create: (context) => ThemeChanger(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => AuthData(),
         ),
         ChangeNotifierProvider(
           create: (context) => ShareMapOfData(),
@@ -43,8 +40,24 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  Future<void> check() async {
+    await Storage().checkData();
+  }
+
+  @override
+  void initState() {
+    Future.delayed(Duration(seconds: 2));
+    check();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

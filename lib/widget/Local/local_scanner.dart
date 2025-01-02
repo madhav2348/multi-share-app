@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:provider/provider.dart';
+import 'package:share_data/notifier/user_notifier.dart';
 import 'package:vibration/vibration.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
@@ -9,7 +10,8 @@ import '/screen/Local/local_view_download.dart';
 import '/notifier/share_notifier.dart';
 
 class LocalScannerWidget extends StatelessWidget {
-  LocalScannerWidget({super.key});
+   LocalScannerWidget({super.key});
+
   final MobileScannerController controller = MobileScannerController();
 
   @override
@@ -30,12 +32,13 @@ class LocalScannerWidget extends StatelessWidget {
                 onDetect: (codes) {
                   if (codes.raw != null) {
                     Vibration.vibrate(duration: 100);
+                    Storage().setSingleData(codes.raw.toString());
                     Map<String, dynamic> scanned_data =
                         jsonDecode(codes.raw.toString());
                     mapingdata.addToMap(scanned_data);
                     print('mapingdata.theDataList' +
                         mapingdata.theDataList[0]['data']);
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       (context),
                       MaterialPageRoute(
                         builder: (context) => const LocalViewDownload(),
@@ -45,13 +48,9 @@ class LocalScannerWidget extends StatelessWidget {
                 },
               ),
             ),
-            const SizedBox(
-              height: 12,
-            ),
+            const SizedBox(height: 12),
             const Text('Scan QR Code of this app only'),
-            const SizedBox(
-              height: 12,
-            ),
+            const SizedBox(height: 12),
           ],
         ),
       ),

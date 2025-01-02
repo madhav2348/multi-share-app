@@ -1,48 +1,49 @@
-import 'package:flutter/foundation.dart';
+import 'package:share_data/model/single_model.dart';
+import 'package:share_data/notifier/share_notifier.dart';
 import 'package:share_data/widget/Local/toastmessage.dart';
 import '/model/data_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AuthData extends ChangeNotifier {
- 
-  RefrenceModel? _localData;
-  bool _isLogged = false;
+import 'dart:convert';
 
-  RefrenceModel? get local => _localData;
 
-  bool get islogged => _isLogged;
-
-  Future<void> localSetAuth(RefrenceModel localmodel) async {
-    if (_localData != null) {
-      _isLogged = true;
+class Storage {
+  Future<void> localSetRefData(RefrenceModel localmodel) async {
+    try {
       final SharedPreferences pref = await SharedPreferences.getInstance();
-      await pref.setString('key', _localData!.keyField);
-      await pref.setString('paired', _localData!.pairedField);
-  
-      await pref.setBool('login', _isLogged);
-      _localData = localmodel;
-    }else {
-      showToast(message: 'User Already Exist');
+      await pref.setString('key', localmodel.keyField);
+      await pref.setString('paired', localmodel.pairedField);
+    } catch (e) {
+      showToast(message: 'Something went wrong during saving ');
     }
-    notifyListeners();
   }
 
-  Future<void> checkLogin() async {
-    final SharedPreferences pref = await SharedPreferences.getInstance();
-    _localData = RefrenceModel(
-      keyField: pref.getString('key') ?? '',
-      pairedField: pref.getString('paired') ?? ''
-     
-    );
-    _isLogged = pref.getBool('login') ?? false;
+  // Future<void> setSingleData(SingleModel model) async {
+  Future<void> setSingleData(String model) async {
+    try {
+      final SharedPreferences pref = await SharedPreferences.getInstance();
+      await pref.setString('key', model);
+    } catch (e) {
+      showToast(message: 'Something went wrong during saving ');
 
-    notifyListeners();
+    }
+  }
+
+  Future<void> checkData() async {
+    try{
+
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    final data =   pref.getString('key') ?? '';
+    Map<String ,dynamic> decodeData = jsonDecode(data);
+    ShareMapOfData().addToMap(decodeData);
+    }catch(e){
+      showToast(message: 'Something went wrong during fetching data');
+
+    }
   }
 
   Future<void> logout() async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
     await pref.clear();
-    _localData = null;
-    _isLogged = false;
   }
 }
