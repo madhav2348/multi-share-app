@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '/notifier/download_xlsx_notifier.dart';
-import '/notifier/share_file_notifier.dart';
 import '/notifier/share_notifier.dart';
 
 class LocalViewDownload extends StatelessWidget {
@@ -42,28 +40,6 @@ class LocalViewDownload extends StatelessWidget {
                       ],
                     );
                   },
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                SizedBox(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      DownloadFileAsXlsx().downloadedFile;
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: const Text('File Downloaded'),
-                          action: SnackBarAction(
-                              label: 'Share',
-                              onPressed: () => ShareFile().shareXlsxFile),
-                        ),
-                      );
-                    },
-                    child: Text('Download as xlsx(${allData.length})'),
-                  ),
-                ),
-                const SizedBox(
-                  height: 30,
                 ),
               ],
             ),

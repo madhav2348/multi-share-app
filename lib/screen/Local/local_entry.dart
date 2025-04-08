@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:share_data/model/single_model.dart';
+import 'package:share_data/notifier/share_notifier.dart';
 import 'package:share_data/screen/local_main_funtion/local_sender_screen.dart';
-import '/screen/Local/local_view_download.dart';
-import '/notifier/add_and_convert_notifier.dart';
 
 class LocalEntryScreen extends StatefulWidget {
   const LocalEntryScreen({super.key});
@@ -14,19 +12,16 @@ class LocalEntryScreen extends StatefulWidget {
 
 class LoginScreenState extends State<LocalEntryScreen> {
   TextEditingController keyValue = TextEditingController();
-  // TextEditingController pairedValue = TextEditingController();
 
-  // final List<RefrenceModel> refModel = [
-  //   RefrenceModel(keyField: '', pairedField: '')
-  // ];
-
-  final List<SingleModel> singleModel = [SingleModel(data: '')]; // i think i dont need it as Provider is proviging the way to save data
-  // void onSave(String key, String value) {
-  //   refModel.add(RefrenceModel(keyField: key, pairedField: value));
-  // }
+  final List<String> singleModel =
+      []; // i think i dont need it as Provider is proviging the way to save data
 
   void onSaveSingle(String data) {
-    singleModel.add(SingleModel(data: data));
+    if (!singleModel.contains(data)) {
+      singleModel.add(data);
+    } else {
+      return;
+    }
   }
 
   void onShare() {
@@ -47,7 +42,7 @@ class LoginScreenState extends State<LocalEntryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final model = Provider.of<AddAndConvertData>(context);
+    final model = Provider.of<ShareMapOfData>(context);
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 50),
         child: Container(
@@ -70,41 +65,16 @@ class LoginScreenState extends State<LocalEntryScreen> {
                             ),
                           ),
                           onChanged: (value) {
-                            singleModel[index] = SingleModel(data: value);
+                            singleModel[index] = value;
                           },
                         ),
-                        // TextField(
-                        //   controller: keyValue,
-                        //   decoration: InputDecoration(
-                        //     label: Text(
-                        //       'Value',
-                        //       style: Theme.of(context).textTheme.headlineLarge,
-                        //     ),
-                        //   ),
-                        //   onChanged: (value) {
-                        //     singleModel[index] = SingleModel(data: value);
-                        //   },
-                        // ),
                       ],
                     );
                   }),
               ElevatedButton(
                 onPressed: () {
-                  // onSave(keyValue.text, pairedValue.text);
-                  // model.addDataToRefModel(RefrenceModel(
-                  //     keyField: keyValue.text, pairedField: pairedValue.text));
                   onSaveSingle(keyValue.text);
-                  model.addDataToSingleModel(SingleModel(data: keyValue.text));
-                },
-                child: const Text('Add'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  // onSave(keyValue.text, pairedValue.text);
-                  // model.addDataToRefModel(RefrenceModel(
-                  //     keyField: keyValue.text, pairedField: pairedValue.text));
-                  onSaveSingle(keyValue.text);
-                  model.addDataToSingleModel(SingleModel(data: keyValue.text));
+                  model.addToMap(keyValue.text);
                   onShare();
                 },
                 child: const Text('Share'),

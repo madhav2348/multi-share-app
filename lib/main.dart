@@ -1,5 +1,3 @@
-import '/notifier/user_notifier.dart';
-
 import '/notifier/share_notifier.dart';
 import '/screen/Local/local_main_screen.dart';
 import '/notifier/theme_notifier.dart';
@@ -40,25 +38,10 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MainScreen extends StatefulWidget {
+class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
 
   @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
-  Future<void> check() async {
-    await Storage().checkData();
-  }
-
-  @override
-  void initState() {
-    Future.delayed(Duration(seconds: 2));
-    check();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return const Scaffold(body: LocalMainScreen());

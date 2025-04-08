@@ -12,7 +12,7 @@ class LocalMainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themer = Provider.of<ThemeChanger>(context);
-    
+
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -45,7 +45,7 @@ class LocalMainScreen extends StatelessWidget {
                       builder: (context) => const LocalEntryScreen(),
                     ),
                   ),
-                  child: const Text('Sender/Scanner'),
+                  child: const Text('Scan'),
                 ),
                 const SizedBox(
                   width: 10,
@@ -54,10 +54,10 @@ class LocalMainScreen extends StatelessWidget {
                   onPressed: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>const LocalRecieverScreen(),
+                      builder: (context) => const LocalRecieverScreen(),
                     ),
                   ),
-                  child: const Text('Receiver/QR Code'),
+                  child: const Text('Create'),
                 ),
               ],
             ),
