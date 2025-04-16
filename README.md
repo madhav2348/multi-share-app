@@ -1,4 +1,4 @@
-# Data(Text Ony) Sharing App (Only for College students)
+# Data(Text Ony) Sharing App
 
 ## Project Origin :
 
