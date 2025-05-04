@@ -2,6 +2,8 @@
 
 ## Project Origin :
 
+A small project to share simple text data betwen two devices ... why?... because to share data you need contact information , that I dont want to 
+
 A new  project inspired from previous one , which was limit , its not like I cant overcome those limit , its just its more flexible to have it different 
 
  
@@ -11,11 +13,6 @@ A new  project inspired from previous one , which was limit , its not like I can
  - Click Sender to send data , fill the data you want to share
  - `Warning` : Only scan the `QR Code` generate by this application only, Other QR will not work , or might work but we dont suggest
 
-# Download for both IOS and ANDROID 
-
- - [IOS]()
- - [ANDROID]()
- - [WEB]() Later.... Because initial idea was to build for mobile device 
 
 ### Disclaimer : 
 
